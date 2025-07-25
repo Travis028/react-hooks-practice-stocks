@@ -1,15 +1,26 @@
-import React from "react";
+function Stock({ stock, onStockClick, isInPortfolio }) {
+  const { ticker, name, price, type } = stock;
 
-function Stock() {
+  const handleClick = () => {
+    onStockClick(stock);
+  };
+
   return (
-    <div>
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">{"Compant Name"}</h5>
-          <p className="card-text">{"Stock Price"}</p>
-        </div>
+    <div 
+      className={`stock ${isInPortfolio ? 'in-portfolio' : ''}`} 
+      onClick={handleClick}
+    >
+      <div className="stock-header">
+        <h3>{ticker}</h3>
+        <span className="price">${price.toFixed(2)}</span>
+      </div>
+      <p className="name">{name}</p>
+      <p className="type">Type: {type}</p>
+      <div className="action">
+        {isInPortfolio ? 'Sell' : 'Buy'}
       </div>
     </div>
   );
 }
+
 export default Stock;
